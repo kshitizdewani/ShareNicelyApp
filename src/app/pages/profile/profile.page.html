@@ -105,19 +105,19 @@
         <ion-col class="right" size-lg="3" size-md="3" size-sm="12">
           <div #mutualConnections style="margin-top: 30px;">
                 <div style="margin-bottom: 30px;">
-                  <h4>Mutual Connections({{profile?.mutual_connections.length}})</h4>
+                  <h4>Mutual Connections({{profile['mutual_connections'].length}})</h4>
                 </div>
-                <div *ngFor="let connection of profile?.mutual_connections">
-                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                <div *ngFor="let connection of profile['mutual_connections']">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection['username'])">
                     <ion-card-header>
                       <ion-card-title>
                         <ion-avatar style="display: inline-block;vertical-align: middle;">
                           <img src="{{url + connection['profile_picture']}}">
                         </ion-avatar>
-                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                        <span style="margin-left:8px;">{{connection['first_name']}} {{connection['last_name']}}</span>
                       </ion-card-title>
                       <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
-                          {{connection?.email}} | {{connection?.username}}
+                          {{connection['email']}} | {{connection['username']}}
                       </ion-card-subtitle>
                     </ion-card-header>
 
@@ -127,22 +127,21 @@
 
           <div #allConnections style="margin-top: 25px;">
                 <div style="margin-bottom: 30px;">
-                  <h4>All Connections({{profile?.all_connections.length}})</h4>
+                  <h4>All Connections({{profile['all_connections'].length}})</h4>
                 </div>
-                <div *ngFor="let connection of profile?.all_connections">
-                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                <div *ngFor="let connection of profile['all_connections']">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection['username'])">
                     <ion-card-header>
                       <ion-card-title>
                         <ion-avatar style="display: inline-block;vertical-align: middle;">
                           <img src="{{url + connection['profile_picture']}}">
                         </ion-avatar>
-                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                        <span style="margin-left:8px;">{{connection['first_name']}} {{connection['last_name']}}</span>
                       </ion-card-title>
                       <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
-                          {{connection?.email}} | {{connection?.username}}
+                          {{connection['email']}} | {{connection['username']}}
                       </ion-card-subtitle>
                     </ion-card-header>
-
                   </ion-card>
                 </div>
           </div>
@@ -150,12 +149,12 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div #mine *ngIf="profile?.mine">
+  <div #mine *ngIf="profile['mine']">
     <ion-grid>
       <ion-row>
         <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
           <ion-avatar style="height:150px;width:150px;display:inline-block;margin-top:25px;">
-            <img class="avatar" src="{{url+profile?.profile_picture}}">
+            <img class="avatar" src="{{url+profile['profile_picture']}}">
           </ion-avatar>
         </ion-col>
         <ion-col class="center" size-lg="6" size-md="6" size-sm="12">
@@ -165,15 +164,15 @@
                 <ion-row>
                   <ion-col style="margin-top:30px;">
                     <div #name>
-                      <span style="font-size:36px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                      <span style="font-size:36px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </div>
 
                     <div #gender style="margin-top: 30px;color:lightgrey">
-                      <span><h6>{{profile?.gender}}</h6></span>
+                      <span><h6>{{profile['gender']}}</h6></span>
                     </div>
                     <div #details style="margin-top: 8px;color:lightgrey;">
                       <span><h5>
-                        {{profile?.mail}} | {{profile?.username}}
+                        {{profile['mail']}} | {{profile['username']}}
                         </h5>
                       </span>
                     </div>
@@ -196,14 +195,14 @@
           <div style='margin-top:25px;'>
             <ion-row>
               <ion-col>
-              <div  *ngFor="let post of profile?.posts">
+              <div  *ngFor="let post of profile['posts']">
                 <ion-card style='margin-bottom:15px;cursor: pointer;'>
                   <ion-card-header>
                     <ion-card-title>
                       <ion-avatar style="display: inline-block;vertical-align: middle;">
                         <img src="{{url + post['profile_picture']}}">
                       </ion-avatar>
-                      <span style="margin-left:8px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                      <span style="margin-left:8px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </ion-card-title>
                     <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
                         <ion-row>on {{post['datetime'].slice(0,10)}} at{{post['datetime'].slice(12,19)}}</ion-row>
@@ -240,19 +239,19 @@
         <ion-col class="right" size-lg="3" size-md="3" size-sm="12">
           <div #allConnections style="margin-top: 25px;">
                 <div style="margin-bottom: 30px;">
-                  <h4>All Connections({{profile?.all_connections.length}})</h4>
+                  <h4>All Connections({{profile['all_connections'].length}})</h4>
                 </div>
-                <div *ngFor="let connection of profile?.all_connections">
-                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                <div *ngFor="let connection of profile['all_connections']">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection['username'])">
                     <ion-card-header>
                       <ion-card-title>
                         <ion-avatar style="display: inline-block;vertical-align: middle;">
                           <img src="{{url + connection['profile_picture']}}">
                         </ion-avatar>
-                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                        <span style="margin-left:8px;">{{connection['first_name']}} {{connection['last_name']}}</span>
                       </ion-card-title>
                       <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
-                          {{connection?.email}} | {{connection?.username}}
+                          {{connection['email']}} | {{connection['username']}}
                       </ion-card-subtitle>
                     </ion-card-header>
 
