@@ -17,6 +17,10 @@ export class SearchPage implements OnInit {
     console.log('search page');
   }
 
+  goToFeed(){
+    this.router.navigateByUrl('')
+  }
+
   searched(event){
     var term = event.target.value;
     console.log(term);

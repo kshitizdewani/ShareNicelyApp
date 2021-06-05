@@ -10,6 +10,10 @@
           <ion-col size-lg="8" size-md="8" offset-md="2" size-sm="12">
             <ion-icon name="home-outline" style="display: inline-block;vertical-align: middle;font-size: 30px;"></ion-icon>
             <span style="display: inline-block;vertical-align: middle;font-size: 26px;margin-left: 8px;">Feed</span>
+            <ion-button style="margin-left:20px;" fill="outline" (click)="goToProfile(userdata['username'])">
+              <ion-icon style="display: inline-block;vertical-align: middle;font-size: 24px;" name="person-circle-outline"></ion-icon>
+              Profile
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

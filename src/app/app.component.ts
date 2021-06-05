@@ -5,8 +5,6 @@ import {AuthService} from "./services/auth-service/auth.service";
 import {ConnectionService} from './services/connection-service/connection.service'
 import {ModalController, ToastController} from '@ionic/angular';
 import {RequestsComponent} from "./components/requests/requests.component";
-
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -61,6 +59,10 @@ export class AppComponent implements OnInit{
     });
     return await modal.present();
   }
+  goToProfile(){
+    this.router.navigateByUrl('/profile/');
+  }
+
   goToSearch(){
     this.router.navigateByUrl('/search');
   }
