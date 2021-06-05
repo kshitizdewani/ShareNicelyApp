@@ -6,7 +6,7 @@
       <ion-row>
         <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
           <ion-avatar style="height:150px;width:150px;display:inline-block;margin-top:25px;">
-            <img class="avatar" src="{{url+profile?.profile_picture}}">
+            <img class="avatar" src="{{url+profile['profile_picture']}}">
           </ion-avatar>
         </ion-col>
         <ion-col class="center" size-lg="6" size-md="6" size-sm="12">
@@ -16,31 +16,31 @@
                 <ion-row>
                   <ion-col style="margin-top:30px;">
                     <div #name>
-                      <span style="font-size:36px;">{{profile.first_name}} {{profile.last_name}}</span>
+                      <span style="font-size:36px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </div>
-                    <div *ngIf="profile?.connection_status == 'accepted'" #connection>
+                    <div *ngIf="profile['connection_status'] == 'accepted'" #connection>
                       <ion-icon size="m" style="color: #355c7d;display: inline-block;margin-right: 5px;vertical-align: middle;" name="checkmark-circle"></ion-icon>
                       <span>connected</span>
                     </div>
                     <div #gender style="margin-top: 30px;color:lightgrey">
-                      <span><h6>{{profile.gender}}</h6></span>
+                      <span><h6>{{profile['gender']}}</h6></span>
                     </div>
                     <div #details style="margin-top: 8px;color:lightgrey;">
                       <span><h5>
-                        {{profile.mail}} | {{profile.username}}
+                        {{profile['mail']}} | {{profile['username']}}
                         </h5>
                       </span>
                     </div>
-                    <div *ngIf="!profile.connected">
-                          <ion-button class="rounded" (click)="sendRequest(profile.username)">Send connection request</ion-button>
+                    <div *ngIf="!profile['connected']">
+                          <ion-button class="rounded" (click)="sendRequest(profile['username'])">Send connection request</ion-button>
                     </div>
-                    <div *ngIf="profile?.connection_status=='requested'">
+                    <div *ngIf="profile['connection_status']=='requested'">
                           <ion-row>
                             <ion-col>
                               <span><h5>connection requested</h5></span>
                             </ion-col>
                             <ion-col>
-                              <ion-button class="rounded" (click)="showCancellationAlert(profile.first_name,profile.username)">Cancel connection request</ion-button>
+                              <ion-button class="rounded" (click)="showCancellationAlert(profile['first_name'],profile['username'])">Cancel connection request</ion-button>
                             </ion-col>
                           </ion-row>
                     </div>
@@ -63,18 +63,18 @@
           <div style='margin-top:25px;'>
             <ion-row>
               <ion-col>
-              <div  *ngFor="let post of profile?.posts">
-                <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(post?.username)">
+              <div  *ngFor="let post of profile['posts']">
+                <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(post['username'])">
                   <ion-card-header>
                     <ion-card-title>
                       <ion-avatar style="display: inline-block;vertical-align: middle;">
                         <img src="{{url + post['profile_picture']}}">
                       </ion-avatar>
-                      <span style="margin-left:8px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                      <span style="margin-left:8px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </ion-card-title>
                     <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
                         <ion-row>on {{post['datetime'].slice(0,10)}} at{{post['datetime'].slice(12,19)}}</ion-row>
-                        <ion-row *ngIf="post?.visibility == 'everyone'; else friends">
+                        <ion-row *ngIf="post['visibility'] == 'everyone'; else friends">
                           <ion-col>
                             <ion-icon style="color: #355c7d;display: inline-block;vertical-align: middle;" name="earth" size="large"></ion-icon>
                             <span style="color: lightgrey;display: inline-block;vertical-align: middle;"><h6 style="color: lightgrey;">Everyone</h6></span>
