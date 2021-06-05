@@ -1,0 +1,40 @@
+<!--<ion-header>-->
+<!--</ion-header>-->
+
+<ion-content fullscreen="true">
+  <ion-title style="padding-top: 18px">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-lg="8" offset-lg="2" size-md="8" offset-md="2" size-sm="12">
+            <h1>Search people</h1>
+            <ion-searchbar (ionInput)="searched($event.target.value)" showCancelButton="focus" color="medium-shade"></ion-searchbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+
+    <div class="container" style="margin-top:15px;">
+      <ion-row>
+        <ion-col size-lg="6" offset-lg="3" size-md="8" offset-md="2" size-sm="12">
+          <ion-list>
+            <ion-list-header style="margin-bottom:8px;" *ngIf="results?.length > 0">Search Results</ion-list-header>
+              <div *ngFor="let person of results">
+                <ion-item style="cursor: pointer;" (click)="goToProfile(person?.username)">
+                  <ion-avatar slot="start">
+                    <img src="{{url+person.profile_picture}}">
+                  </ion-avatar>
+                  <ion-label>
+                    <h2>{{person.first_name}} {{person.last_name}}</h2>
+                    <h3>{{person.email}} | {{person.username}}</h3>
+                    <div *ngIf="person.isConnection" >
+                      <ion-icon name="checkmark-outline" style="display: inline-block;vertical-align: middle;"></ion-icon>
+                      <span><b>connected</b></span>
+                    </div>
+                  </ion-label>
+                </ion-item>
+              </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-header >
+        <ion-toolbar color="primary" style="border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;border-top-left-radius: 3px;border-top-right-radius: 3px">
+            <ion-buttons slot="start" (click)="clicked()">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+
+            <ion-title (click)="goToFeed()" style="cursor: pointer;">
+                ShareNicely
+            </ion-title>
+            <ion-item *ngIf="authenticated" (click)="showRequests()" button color="primary" slot="end" style="margin-right: 5px;">
+              <ion-icon name="person-add-outline" slot="end" size="medium" ></ion-icon>
+              <ion-badge style="display: inline-block;vertical-align: middle;" color="light">{{ requests?.length || '0' }}</ion-badge>
+              <span>Requests</span>
+            </ion-item>
+            <ion-item *ngIf="authenticated" button (click)="goToSearch()" color="primary" slot="end" style="margin-right: 5px;">
+                <ion-icon name="search" slot="end" size="medium" ></ion-icon>
+                Search
+            </ion-item>
+            <ion-item *ngIf="authenticated" button (click)="logOut()" color="primary" slot="end" style="margin-right: 15px;">
+                <ion-icon name="log-out" slot="end" size="medium" ></ion-icon>
+                Log out
+            </ion-item>
+        </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+
+</ion-app>

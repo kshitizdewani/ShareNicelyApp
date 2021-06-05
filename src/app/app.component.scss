@@ -1,0 +1,7 @@
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.my-custom-class .modal-wrapper {
+  background: lightgrey;
+  border-radius: 5px;
+  border-color: #3dc2ff;
+}

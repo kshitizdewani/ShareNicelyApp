@@ -1,0 +1,266 @@
+
+
+<ion-content>
+  <div #not_mine *ngIf="!profile?.mine">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
+          <ion-avatar style="height:150px;width:150px;display:inline-block;margin-top:25px;">
+            <img class="avatar" src="{{url+profile?.profile_picture}}">
+          </ion-avatar>
+        </ion-col>
+        <ion-col class="center" size-lg="6" size-md="6" size-sm="12">
+          <ion-header>
+            <ion-title style="padding-top: 18px">
+              <!-- <ion-grid> -->
+                <ion-row>
+                  <ion-col style="margin-top:30px;">
+                    <div #name>
+                      <span style="font-size:36px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                    </div>
+                    <div *ngIf="profile?.connection_status == 'accepted'" #connection>
+                      <ion-icon size="m" style="color: #355c7d;display: inline-block;margin-right: 5px;vertical-align: middle;" name="checkmark-circle"></ion-icon>
+                      <span>connected</span>
+                    </div>
+                    <div #gender style="margin-top: 30px;color:lightgrey">
+                      <span><h6>{{profile?.gender}}</h6></span>
+                    </div>
+                    <div #details style="margin-top: 8px;color:lightgrey;">
+                      <span><h5>
+                        {{profile?.mail}} | {{profile?.username}}
+                        </h5>
+                      </span>
+                    </div>
+                    <div *ngIf="!profile?.connected">
+                          <ion-button class="rounded" (click)="sendRequest(profile?.username)">Send connection request</ion-button>
+                    </div>
+                    <div *ngIf="profile?.connection_status=='requested'">
+                          <ion-row>
+                            <ion-col>
+                              <span><h5>connection requested</h5></span>
+                            </ion-col>
+                            <ion-col>
+                              <ion-button class="rounded" (click)="showCancellationAlert(profile?.first_name,profile?.username)">Cancel connection request</ion-button>
+                            </ion-col>
+                          </ion-row>
+                    </div>
+                  </ion-col>
+                </ion-row>
+            </ion-title>
+          </ion-header>
+          <hr style="background:white;margin-top:40px;">
+          <div>
+            <ion-title style="margin-top: 10px">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <h1>Posts</h1>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-title>
+          </div>
+          <div style='margin-top:25px;'>
+            <ion-row>
+              <ion-col>
+              <div  *ngFor="let post of profile?.posts">
+                <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(post?.username)">
+                  <ion-card-header>
+                    <ion-card-title>
+                      <ion-avatar style="display: inline-block;vertical-align: middle;">
+                        <img src="{{url + post['profile_picture']}}">
+                      </ion-avatar>
+                      <span style="margin-left:8px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                    </ion-card-title>
+                    <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                        <ion-row>on {{post['datetime'].slice(0,10)}} at{{post['datetime'].slice(12,19)}}</ion-row>
+                        <ion-row *ngIf="post?.visibility == 'everyone'; else friends">
+                          <ion-col>
+                            <ion-icon style="color: #355c7d;display: inline-block;vertical-align: middle;" name="earth" size="large"></ion-icon>
+                            <span style="color: lightgrey;display: inline-block;vertical-align: middle;"><h6 style="color: lightgrey;">Everyone</h6></span>
+                          </ion-col>
+                        </ion-row>
+                        <ion-row>
+                          <ion-col>
+                            <ng-template #friends>
+                              <ion-icon style="color: #355c7d;display: inline-block;vertical-align: middle;" name="people-circle" size="medium"></ion-icon>
+                              <span style="color: lightgrey;margin-left: 8px;"><h6 style="color: lightgrey;">Friends</h6></span>
+                            </ng-template>
+                          </ion-col>
+                        </ion-row>
+                    </ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-col>
+                      <span><h2 style="color: white;">{{post['content']}}</h2>
+                      </span>
+                    </ion-col>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        <ion-col class="right" size-lg="3" size-md="3" size-sm="12">
+          <div #mutualConnections style="margin-top: 30px;">
+                <div style="margin-bottom: 30px;">
+                  <h4>Mutual Connections({{profile?.mutual_connections.length}})</h4>
+                </div>
+                <div *ngFor="let connection of profile?.mutual_connections">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                    <ion-card-header>
+                      <ion-card-title>
+                        <ion-avatar style="display: inline-block;vertical-align: middle;">
+                          <img src="{{url + connection['profile_picture']}}">
+                        </ion-avatar>
+                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                      </ion-card-title>
+                      <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                          {{connection?.email}} | {{connection?.username}}
+                      </ion-card-subtitle>
+                    </ion-card-header>
+
+                  </ion-card>
+                </div>
+          </div>
+
+          <div #allConnections style="margin-top: 25px;">
+                <div style="margin-bottom: 30px;">
+                  <h4>All Connections({{profile?.all_connections.length}})</h4>
+                </div>
+                <div *ngFor="let connection of profile?.all_connections">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                    <ion-card-header>
+                      <ion-card-title>
+                        <ion-avatar style="display: inline-block;vertical-align: middle;">
+                          <img src="{{url + connection['profile_picture']}}">
+                        </ion-avatar>
+                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                      </ion-card-title>
+                      <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                          {{connection?.email}} | {{connection?.username}}
+                      </ion-card-subtitle>
+                    </ion-card-header>
+
+                  </ion-card>
+                </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div #mine *ngIf="profile?.mine">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
+          <ion-avatar style="height:150px;width:150px;display:inline-block;margin-top:25px;">
+            <img class="avatar" src="{{url+profile?.profile_picture}}">
+          </ion-avatar>
+        </ion-col>
+        <ion-col class="center" size-lg="6" size-md="6" size-sm="12">
+          <ion-header>
+            <ion-title style="padding-top: 18px">
+              <!-- <ion-grid> -->
+                <ion-row>
+                  <ion-col style="margin-top:30px;">
+                    <div #name>
+                      <span style="font-size:36px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                    </div>
+
+                    <div #gender style="margin-top: 30px;color:lightgrey">
+                      <span><h6>{{profile?.gender}}</h6></span>
+                    </div>
+                    <div #details style="margin-top: 8px;color:lightgrey;">
+                      <span><h5>
+                        {{profile?.mail}} | {{profile?.username}}
+                        </h5>
+                      </span>
+                    </div>
+                  </ion-col>
+                </ion-row>
+            </ion-title>
+          </ion-header>
+          <hr style="background:white;margin-top:40px;">
+          <div>
+            <ion-title style="margin-top: 10px">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <h1>Posts</h1>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-title>
+          </div>
+          <div style='margin-top:25px;'>
+            <ion-row>
+              <ion-col>
+              <div  *ngFor="let post of profile?.posts">
+                <ion-card style='margin-bottom:15px;cursor: pointer;'>
+                  <ion-card-header>
+                    <ion-card-title>
+                      <ion-avatar style="display: inline-block;vertical-align: middle;">
+                        <img src="{{url + post['profile_picture']}}">
+                      </ion-avatar>
+                      <span style="margin-left:8px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                    </ion-card-title>
+                    <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                        <ion-row>on {{post['datetime'].slice(0,10)}} at{{post['datetime'].slice(12,19)}}</ion-row>
+                        <ion-row *ngIf="post?.visibility == 'everyone'; else friends">
+                          <ion-col>
+                            <ion-icon style="color: #355c7d;display: inline-block;vertical-align: middle;" name="earth" size="medium"></ion-icon>
+                          <span style="color: lightgrey;margin-left:8px;display: inline-block;vertical-align: middle;"><h6 style="color: lightgrey;">Everyone</h6></span>
+                          </ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                          <ion-col>
+                            <ng-template #friends>
+                              <ion-icon size="large" style="color: #355c7d;display: inline-block;vertical-align: middle;" name="people-circle" ></ion-icon>
+                              <span style="color: lightgrey;margin-left: 8px;"><h6 style="color: lightgrey;">Friends</h6></span>
+                            </ng-template>
+                          </ion-col>
+                        </ion-row>
+
+                    </ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-col>
+                      <span><h2 style="color: white;">{{post['content']}}</h2>
+                      </span>
+                    </ion-col>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+        <ion-col class="right" size-lg="3" size-md="3" size-sm="12">
+          <div #allConnections style="margin-top: 25px;">
+                <div style="margin-bottom: 30px;">
+                  <h4>All Connections({{profile?.all_connections.length}})</h4>
+                </div>
+                <div *ngFor="let connection of profile?.all_connections">
+                  <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(connection?.username)">
+                    <ion-card-header>
+                      <ion-card-title>
+                        <ion-avatar style="display: inline-block;vertical-align: middle;">
+                          <img src="{{url + connection['profile_picture']}}">
+                        </ion-avatar>
+                        <span style="margin-left:8px;">{{connection?.first_name}} {{connection?.last_name}}</span>
+                      </ion-card-title>
+                      <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                          {{connection?.email}} | {{connection?.username}}
+                      </ion-card-subtitle>
+                    </ion-card-header>
+
+                  </ion-card>
+                </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

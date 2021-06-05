@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-title style="padding-top: 18px">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <ion-avatar>
+              <img src="{{profile_pic}}">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size-lg="8" size-md="8" offset-md="2" size-sm="12">
+            <ion-icon name="home-outline" style="display: inline-block;vertical-align: middle;font-size: 30px;"></ion-icon>
+            <span style="display: inline-block;vertical-align: middle;font-size: 26px;margin-left: 8px;">Feed</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+</ion-header>
+
+<ion-content>
+  <div class="container" style="margin-top: 20px">
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col size-lg="6" offset-lg="3" size-md="8" offset-md="2" size-sm="12">
+            <ion-card>
+              <ion-card-content>
+                <ion-textarea [(ngModel)]="content" placeholder="Share a post with friends... Write here." style="--color:white;--background:medium">
+                </ion-textarea>
+                  <ion-row>
+                    <ion-col size-lg="5">
+                      <ion-item>
+                        <ion-label>Visibility</ion-label>
+                        <ion-select placeholder="choose" [(ngModel)]="scope" interface="popover">
+                          <ion-select-option value="friends">friends</ion-select-option>
+                          <ion-select-option value="everyone">everyone</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button class="rounded" expand="block" (click)="createPost()">
+                        Post
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+              </ion-card-content>
+            </ion-card>
+            <hr style="background:white;margin-top:40px;">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div style='margin-top:25px;'>
+      <ion-row>
+        <ion-col size-lg="6" offset-lg="3" size-md="8" offset-md="2" size-sm="12">
+        <div  *ngFor="let post of posts">
+          <ion-card style='margin-bottom:15px;cursor: pointer;' (click)="goToProfile(post?.username)">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-avatar style="display: inline-block;vertical-align: middle;">
+                  <img src="{{url + post['profile_picture']}}">
+                </ion-avatar>
+                <span style="margin-left:8px;">{{post?.first_name}} {{post?.last_name}}</span>
+              </ion-card-title>
+              <ion-card-subtitle style="display: inline-block;vertical-align: middle;">
+                {{post['datetime'].slice(12,19)}} {{post['datetime'].slice(0,10)}}
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-col>
+                <span>{{post['content']}}
+                </span>
+              </ion-col>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

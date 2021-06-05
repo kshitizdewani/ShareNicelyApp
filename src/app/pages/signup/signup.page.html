@@ -1,0 +1,75 @@
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title style="padding-top: 10px">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-lg="8" offset-lg="2" size-md="8" offset-md="2" size-sm="12">
+            <h2>Create Account</h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-title>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-lg="6" offset-lg="3" size-md="8" offset-md="2" size-sm="12">
+        <ion-card>
+          <ion-card-content>
+            <ion-row>
+              <ion-col>
+                <b>Enter your details</b>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <ion-item>
+                <ion-label position="floating">First name</ion-label>
+                <ion-input type="text" formControlName="first_name"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Last name</ion-label>
+                <ion-input type="text" formControlName="last_name"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Gender</ion-label>
+                        <ion-select placeholder="choose" formControlName="gender" interface="popover">
+                          <ion-select-option value="male">Male</ion-select-option>
+                          <ion-select-option value="female">Female</ion-select-option>
+                        </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">10 digit phone number</ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+
+              <ion-button class="rounded" [disabled]="!form.valid" type="submit" (click)="onSubmit()" expand="block">Sign up</ion-button>
+            </form>
+            <ion-button (click)="showform()" >Show</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+<ion-footer>
+  <ion-row>
+    <ion-col size-lg="6" offset-lg="3" size-md="8" offset-md="2" size-sm="12">
+      <ion-button class="rounded" color="danger" (click)="goToLogin()" expand="block">Cancel</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+</ion-content>
