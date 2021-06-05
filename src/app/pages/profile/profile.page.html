@@ -1,7 +1,7 @@
 
 
 <ion-content>
-  <div #not_mine *ngIf="!profile?.mine">
+  <div #not_mine *ngIf="!profile.mine">
     <ion-grid>
       <ion-row>
         <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
@@ -16,23 +16,23 @@
                 <ion-row>
                   <ion-col style="margin-top:30px;">
                     <div #name>
-                      <span style="font-size:36px;">{{profile?.first_name}} {{profile?.last_name}}</span>
+                      <span style="font-size:36px;">{{profile.first_name}} {{profile.last_name}}</span>
                     </div>
                     <div *ngIf="profile?.connection_status == 'accepted'" #connection>
                       <ion-icon size="m" style="color: #355c7d;display: inline-block;margin-right: 5px;vertical-align: middle;" name="checkmark-circle"></ion-icon>
                       <span>connected</span>
                     </div>
                     <div #gender style="margin-top: 30px;color:lightgrey">
-                      <span><h6>{{profile?.gender}}</h6></span>
+                      <span><h6>{{profile.gender}}</h6></span>
                     </div>
                     <div #details style="margin-top: 8px;color:lightgrey;">
                       <span><h5>
-                        {{profile?.mail}} | {{profile?.username}}
+                        {{profile.mail}} | {{profile.username}}
                         </h5>
                       </span>
                     </div>
-                    <div *ngIf="!profile?.connected">
-                          <ion-button class="rounded" (click)="sendRequest(profile?.username)">Send connection request</ion-button>
+                    <div *ngIf="!profile.connected">
+                          <ion-button class="rounded" (click)="sendRequest(profile.username)">Send connection request</ion-button>
                     </div>
                     <div *ngIf="profile?.connection_status=='requested'">
                           <ion-row>
@@ -40,7 +40,7 @@
                               <span><h5>connection requested</h5></span>
                             </ion-col>
                             <ion-col>
-                              <ion-button class="rounded" (click)="showCancellationAlert(profile?.first_name,profile?.username)">Cancel connection request</ion-button>
+                              <ion-button class="rounded" (click)="showCancellationAlert(profile.first_name,profile.username)">Cancel connection request</ion-button>
                             </ion-col>
                           </ion-row>
                     </div>
