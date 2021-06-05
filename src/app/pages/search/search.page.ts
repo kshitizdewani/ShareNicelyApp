@@ -17,7 +17,8 @@ export class SearchPage implements OnInit {
     console.log('search page');
   }
 
-  searched(term){
+  searched(event){
+    var term = event.target.value;
     console.log(term);
     if (term && term.trim !=''){
     this.searchService.search(term).subscribe(result => {
