@@ -24,17 +24,31 @@
           <ion-list>
             <ion-list-header style="margin-bottom:8px;" *ngIf="results?.length > 0">Search Results</ion-list-header>
               <div *ngFor="let person of results">
-                <ion-item style="cursor: pointer;" (click)="goToProfile(person?.username)">
-                  <ion-avatar slot="start">
+                <ion-item >
+                  <ion-avatar slot="start" style="cursor: pointer;" (click)="goToProfile(person?.username)">
                     <img src="{{url+person.profile_picture}}">
                   </ion-avatar>
                   <ion-label>
-                    <h2>{{person.first_name}} {{person.last_name}}</h2>
-                    <h3>{{person.email}} | {{person.username}}</h3>
-                    <div *ngIf="person.isConnection" >
+                    <h2 style="cursor: pointer;" (click)="goToProfile(person?.username)">{{person.first_name}} {{person.last_name}}</h2>
+                    <h3 style="cursor: pointer;" (click)="goToProfile(person?.username)">{{person.email}} | {{person.username}}</h3>
+                    <div *ngIf="person['connection_status'] == 'accepted'" >
                       <ion-icon name="checkmark-outline" style="display: inline-block;vertical-align: middle;"></ion-icon>
                       <span><b>connected</b></span>
                     </div>
+                    <div *ngIf="!person['connected']">
+                      <ion-button class="rounded" (click)="sendRequest(person['username'])">Send connection request</ion-button>
+                </div>
+                <div *ngIf="person['connection_status']=='requested'">
+                      <ion-row>
+                        <ion-col>
+                          <span><h5>connection requested</h5></span>
+                        </ion-col>
+                        <ion-col>
+                          <ion-button class="rounded" (click)="showCancellationAlert(person['first_name'],person['username'])">Cancel connection request</ion-button>
+                        </ion-col>
+                      </ion-row>
+                </div>
+
                   </ion-label>
                 </ion-item>
               </div>

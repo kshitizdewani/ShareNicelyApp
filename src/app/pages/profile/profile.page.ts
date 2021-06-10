@@ -13,6 +13,7 @@ import {ConnectionService} from "../../services/connection-service/connection.se
 export class ProfilePage implements OnInit {
   profile: any[];
   url = url.slice(0,-1);
+  mine : boolean;
   constructor(private route: ActivatedRoute,
               private profileService: ProfileService,
               private router:Router,
@@ -32,6 +33,7 @@ export class ProfilePage implements OnInit {
        this.profileService.getProfile(username)
        .subscribe(resp => {
          this.profile = resp;
+         this.mine = this.profile['mine'];
           console.log(JSON.stringify(this.profile));
        });
      });

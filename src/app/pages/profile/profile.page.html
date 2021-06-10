@@ -1,7 +1,7 @@
 
 
 <ion-content>
-  <div #not_mine *ngIf="!profile['mine']">
+  <div #not_mine *ngIf="mine == false">
     <ion-grid>
       <ion-row>
         <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
@@ -68,7 +68,7 @@
                   <ion-card-header>
                     <ion-card-title>
                       <ion-avatar style="display: inline-block;vertical-align: middle;">
-                        <img src="{{url + post['profile_picture']}}">
+                        <img src="{{url + profile['profile_picture']}}">
                       </ion-avatar>
                       <span style="margin-left:8px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </ion-card-title>
@@ -149,12 +149,12 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div #mine *ngIf="profile['mine']">
+  <div #mine *ngIf="mine == true">
     <ion-grid>
       <ion-row>
         <ion-col class="left" size-lg="3" size-md="3" size-sm="12" style="width: 100%;text-align: center;">
           <ion-avatar style="height:150px;width:150px;display:inline-block;margin-top:25px;">
-            <img class="avatar" src="{{url+profile['profile_picture']}}">
+            <img class="avatar" src="{{url+profile['picture']}}">
           </ion-avatar>
         </ion-col>
         <ion-col class="center" size-lg="6" size-md="6" size-sm="12">
@@ -200,7 +200,7 @@
                   <ion-card-header>
                     <ion-card-title>
                       <ion-avatar style="display: inline-block;vertical-align: middle;">
-                        <img src="{{url + post['profile_picture']}}">
+                        <img src="{{url + profile['picture']}}">
                       </ion-avatar>
                       <span style="margin-left:8px;">{{profile['first_name']}} {{profile['last_name']}}</span>
                     </ion-card-title>
